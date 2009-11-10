@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   helper_method :sections
 
   SECTIONS = ['inicio', 'websamigas', 'conferencias', 'paraleer', 'mislibros', 'premios', 'biografia',
-    'encuentros', '---', 'contacto', 'el sáhara']
+    'encuentros', 'matematicas', 'contacto', 'elsahara']
 
   SECTIONS_OLD = ['inicio', 'paraviajar', 'paraleer', 'mislibros', 'premios', 'biografia', 'contacto', 'critica']
 
