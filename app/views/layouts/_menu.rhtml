@@ -1,19 +1,11 @@
-  <div id="menu">
-  	<div id="logo">
-                <%= link_to image_tag('ricardogomez.gif'), {:section => ''}, {:alt => 'logoric'} %>
-<!--
+<div id="menu">
+  <div id="logo">
+    <%= link_to image_tag('ricardogomez.gif'), {:section => ''}, {:alt => 'logoric'} %>
+    <div id="sections">
+      <% sections.each do |section| %>
+        <%= section_for section %>
+      <% end %>
+    </div>
+  </div>
+</div> <!-- menu -->
 
-  		<a href="/"><img id="ricardogomez" src="images/ricardogomez.gif" alt="ricardo g&oacute;mez" /></a>
-                -->
-  	</div> <!-- logo -->
-  	<div id="sections">
-  	<%= section_for :inicio %>
-  	<%= section_for :paraviajar %>
-  	<%= section_for :paraleer %>
-  	<%= section_for :mislibros %>
-  	<%= section_for :premios %>
-  	<%= section_for :biografia %>
-  	<%= section_for :contacto %>
-  	</div>
-  </div> <!-- menu -->
-  

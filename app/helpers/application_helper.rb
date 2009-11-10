@@ -2,7 +2,7 @@
 module ApplicationHelper
   	def section_for(name)
 		name = name.to_s
-		link_to image_tag(name + '.gif'), {:controller => 'ver', :action => 'show',  :section => name}, {:class => 'item' }
+		link_to "<h2>#{name}</h2>", {:controller => 'ver', :action => 'show',  :section => name}, {:class => 'item' }
 	end
 
 	def default_url(name)
