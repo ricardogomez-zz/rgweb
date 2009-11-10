@@ -1,0 +1,13 @@
+<h1>Crear una página nueva en la sección '<%= @page.section %>'</h1>
+
+<div class="actions">
+	<%= link_to_function 'Crear esta página', 'getElementById("editor").submit();' %>
+	<%= link_to "Cancelar y volver a ''#{@page.section}''",
+		{:controller => 'editar', :action => 'lista', :section => @page.section} %>
+	<div class="spacer">&nbsp;</div>
+</div>
+
+
+<% form_for :page, @page, :url => {:action => 'create'}, :html => {:multipart => true, :id => 'editor'}  do |form| %>
+  <%= render :partial => 'form', :locals => {:f => form, :page => @page} %>
+<% end %>

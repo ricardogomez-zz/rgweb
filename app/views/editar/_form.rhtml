@@ -1,0 +1,63 @@
+
+
+
+
+
+
+
+
+<%= error_messages_for 'page' %>
+
+<!--[form:page]-->
+<p><label for="page_name">Nombre</label><br/>
+<%= f.text_field :name  %></p>
+
+<p><label for="page_title">Título</label><br/>
+<%= f.text_field :title  %></p>
+
+<p><label for="page_position">Posición</label><br/>
+<%= f.text_field :position  %></p>
+
+<% if @page.section? %>
+<p><label for="page_extra">¿Quieres que se muestren las páginas hijas?</label><br/>
+<%= select_tag "page[extra]", options_for(page) %></p>
+<% else %>
+<p><label for="page_extra">Subgrupo</label><br/>
+<%= f.text_field :extra  %></p>
+<% end %>
+
+<p><label for="page_main_image">Imagen principal</label><br/>
+<% if @page.main_image.nil? %>
+<%= file_field_tag :main_data  %><br/>
+<% else %>
+<span style="color: #c00">borra primero la imágen para poder subir otra</span><br/>
+<% end %>
+usa imágenes a 72dpi de resulución. <br/>
+para los libros estoy usando imágenes de 228pixels de ancho<br/>
+</p>
+
+<p>El texto funciona con códigos que se
+pueden consultar <a href="http://hobix.com/textile/quick.html" target="_blank">aquí</a></p>
+
+<p><label for="page_section">Sección</label><br/>
+<%= f.text_field :section  %></p>
+
+<p><label for="page_head">Introducción</label><br/>
+<%= f.text_area :head, :class => 'small'  %></p>
+
+<p><label for="page_content">Contenido</label><br/>
+<%= f.text_area :content  %></p>
+
+<p><label for="page_end">Conclusión</label><br/>
+<%= f.text_area :end, :class => 'small'   %></p>
+
+<!--[eoform:page]-->
+
+<div class="actions">
+	<%= link_to_function 'Guardar', 'getElementById("editor").submit();' %>
+</div>
+
+<div class="spacer">&nbsp;</div>
+<br />
+
+

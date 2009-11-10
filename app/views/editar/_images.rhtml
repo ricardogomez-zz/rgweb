@@ -1,0 +1,36 @@
+
+
+<div id="pageImages">
+	<h1>Imágenes asociadas a esta página</h1>
+	<% for image in page.attachments %>
+		<div class="image">
+			<h2><%= image.filename %></h2>
+			<label>tipo:</label> <%= image.tags %><br/>
+			<label>tamaño:</label> <%= image.width %>x<%= image.height %><br/>
+			<label>insertar:</label> !<%= image.public_filename %>!<br/>
+			<label>insertar miniatura:</label> !<%= image.public_filename(:thumb) %>!<br/>
+			<%= image_tag image.public_filename, :alt => image.filename %>
+			<%= image_tag image.public_filename(:thumb), :alt => image.filename + '(thumbnail)' %>
+			<br/>
+			<%= link_to 'borrar', {:controller => 'attachments', :action => 'delete_image', :page => page.id, :id => image.id},
+				:confirm => "estás a punto de borrar la #{image.tags}. seguro!!?" %><br/>
+		</div>
+	<% end %>
+
+	<div class="nested">
+		<h1>Añadir otra imágen a esta página</h1>
+		<% form_for :attachment, Attachment.new, :url => {:action => 'add_attachment', :id => page}, :html => {:multipart => true}  do |quick| %>
+			<p><label>Archivo:</label><br/>
+			<%= file_field_tag :data  %></p>
+			</p>
+			<%= submit_tag 'añadir imágen' %>
+		<% end %>
+	</div>
+
+<label>trucos para insertar:</label> <br/>
+ - puedes hacer que el texto fluya alrededor de la imágen<br/>
+ escribe un < después del primer ! para situarla a la izquierda<br/>
+ o  un > después del primer ! para situarla a la derecha<br/>
+
+</div>
+

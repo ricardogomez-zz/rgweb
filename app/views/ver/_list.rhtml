@@ -1,0 +1,10 @@
+<% for child in @pages %>
+	<ul>
+	<% if child.id != @page.id %>
+		<li><%= link_to child.name, :controller => 'ver', :action => 'show',
+			 :section => child.section, :page => child.name %>
+		</li>
+	<% end %>
+	</ul>
+<% end %>
+

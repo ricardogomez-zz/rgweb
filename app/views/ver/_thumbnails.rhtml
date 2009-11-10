@@ -1,0 +1,12 @@
+<% for child in @pages %>
+	
+	<% if child.id != @page.id %>
+		<% if @subsection_header != child.extra %>
+			<%  @subsection_header = child.extra %>
+			<h3><%= @subsection_header %></h3>
+		<% end %>
+		<%= link_to main_thumb_of(child), :controller => 'ver', :action => 'show',
+			 :section => child.section, :page => child.name %>
+	<% end %>
+<% end %>
+	

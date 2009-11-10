@@ -1,0 +1,19 @@
+<div id="head">
+<h1><%= @page.title %></h1>
+<%= beautify @page.head %>
+</div>
+
+<% if @page.has_main_image? %>
+	<div id="mainImage">
+	<%= image_tag @page.main_image.public_filename %>
+	</div>
+<% end %>
+
+<%= beautify @page.content %>
+<div style="clear: both">
+<%= beautify @page.end %>
+</div>
+
+<%= render :partial => 'thumbnails' if @page.show_thumnails? %>	
+
+<%= render :partial => 'list' if @page.show_list? %>

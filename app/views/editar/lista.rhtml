@@ -1,0 +1,45 @@
+<h1>sección: <%= current_section %></h1>
+
+<div class="actions">
+	<%= link_to 'Ver secci&oacute;n', :controller => 'ver', :action => 'show', :section => current_section %>
+	<%= link_to 'Crear una nueva página', :action => 'new', :section => current_section %>
+	<%= link_to 'Reordenar', {:action => 'reorder', :section => current_section}, 
+		{:confirm => 'Quieres reordenar la seccion?'} %>
+	<div class="spacer"></div>
+</div>
+
+<table>
+<thead>
+  <tr>
+  <td>
+   </td>
+	<td>Nombre</td>
+	<td>Título</td>
+	<td>Posición</td>
+	<td>Sección</td>
+	<td>Extra</td>
+	<td>Contenido</td>
+</thead>
+<tbody>
+<% for page in @pages %>
+  <tr class="<%= cycle("even", "odd") -%>">
+  <td class="row_actions">
+  	<%= link_to 'Ver', :controller => 'ver', :action => 'show', :section => page.section, :page 	 => page.name %>
+    <%= link_to 'Editar', :action => 'edit', :id => page %>
+    <%= link_to 'Borrar', { :action => 'destroy', :id => page }, :confirm => "Vas a borrar #{page.title}. Estas seguro?", :method => :post %>
+  	</td>
+  	<td><%= page.name %></td>
+  	<td><%= page.title %></td>
+  	<td><%= page.position %></td>
+  	<td><%= page.section %></td>
+  	<td><%= page.extra %></td>
+  	<td><%= beautify page.head	 %><br/>
+  	<%= truncate(page.content, 200) %><br/>
+  	<%= beautify page.end %></td>
+  	<td></td>
+  </tr>
+<% end %>
+</table>
+
+<br/>
+

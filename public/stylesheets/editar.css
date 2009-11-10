@@ -1,0 +1,137 @@
+
+body {
+	background-color: #9C1526;
+	font-family: "Verdana", sans;
+	font-size: 75%;
+}
+
+
+h1 {
+	font-size: 160%;
+}
+
+h2 {
+	font-size: 120%;
+	font-weight: bold;
+}
+
+p {
+	margin: 10px 0;
+}
+
+a {
+	text-decoration: none;
+	color: gray;
+}
+
+a:hover {
+	color: #c00;
+}
+
+
+label {
+	font-weight: bold;
+}
+
+#page {
+	background-color: white;
+	width: 80%;
+	border: 1px solid #efefef;
+	padding: 10px;
+	margin: 10px auto;
+}
+
+#search {
+	float: right;
+}
+
+#flash {
+	color: green;
+	margin: 15px 0 5px 0;
+	font-size: 120%;
+	}
+
+.actions a {
+	display: block;
+	float: left;
+	border: 1px solid lightgray;
+	padding: 3px 5px;
+	margin: 0 5px 0 0;
+}
+
+.actions {
+	margin: 10px 20px 10px 0;
+}
+
+/* FORMS */
+input[type='text'] {
+	border: 1px solid black;
+	padding: 2px;
+	width: 300px;
+}
+
+textarea {
+	width: 500px;
+	height: 200px;
+	border: 1px solid black;
+	padding: 2px;
+}
+
+textarea.small {
+	height: 80px;
+}
+
+#pageImages {
+	float: right;
+}
+
+#pageImages .image {
+	border: 3px solid lightgray;
+	padding: 5px;
+	margin: 3px 0;
+}
+
+.nested {
+	border: 3px solid lightgray;
+	padding: 5px;
+	margin: 12px 0;
+}
+
+/* TABLES */
+thead {
+	font-weight: bold;
+	color: black;
+}
+
+table tr td {
+	border: 0px solid #000;
+	vertical-align: top;
+	padding: 3px;
+	margin: 0;
+}
+
+.even {
+	background-color: #efefef;
+}
+
+p.separa {
+	display: none;
+}
+
+
+.row_actions a {
+	display: block;
+	font-size: 80%;
+	border: 1px solid #aaa;
+	background-color: #aaa;
+	color: white;
+	padding: 1px 2px;
+	margin: 1px;
+	text-align: center;
+}
+
+.row_actions a:hover {
+	border: 1px solid #c00;
+	background-color: #c00;
+}
+

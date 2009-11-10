@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/common.css" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/editar.css" />
+  <title>Editar ricardogomez.com :: <%= current_section %></title>
+</head>
+<body>
+
+<div id="page">
+	<div id="search">
+	<% form_tag '/editar/lista' do %>
+	buscar en sección:
+	<%= text_field_tag 'section' %>
+	<% end %>
+	</div>
+
+	<% for section in @sections %>
+		<%= link_to_if section != current_section, section, :action => 'lista', :section => section %> |
+	<% end %>
+
+	<div id="flash"><%= flash[:notice] %></div>
+	<%= yield  %>
+</div>
+
+</body>
+</html>

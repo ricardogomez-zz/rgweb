@@ -1,0 +1,143 @@
+
+body {
+	background-color: #F0F0D8;
+	text-align: left;
+	font-family: Georgia, Times, serif;
+	font-size: 15px;
+	color: #180000;
+}
+
+p {
+	margin: 0 0 7px 0;
+}
+
+p.separa {
+	overflow: hidden;
+	display: block;
+	height: 1px;
+	border-top: 1px solid #904830;
+	margin: 20px 20%;
+}
+
+strong {
+	font-weight: bold;
+}
+
+h1, h3 {
+	padding: 6px 0 0 0;
+	color: #904830;
+}
+
+h1 {
+	font-size: 150%;	
+}
+
+h3 {
+	font-size: 120%;
+}
+
+a {
+	text-decoration: none;
+	color: #904830;
+}
+
+a:hover {
+	color: #c00;
+}
+
+#sections a {
+	display: block;
+	height: 22px;
+}
+
+hr {
+
+height: 0px;
+text-align: center;
+color: #904830;
+background-color: #904830;
+}
+
+
+#head {
+	height: 100px;
+}
+
+#logo {
+	text-align: right;
+	width: 190px;
+	height: 100px;
+}
+
+
+#page_top {
+	border: 0;
+	padding: 0;
+	height: 29px;
+	background: url(../images/page-top.gif) no-repeat;	
+}
+
+div#page {
+	width: 930px;
+	padding: 0;
+	margin: 20px auto;
+}
+
+#page_middle {
+	margin: 0;
+	padding: 0;
+	background: url(../images/page-middle.gif) repeat-y;
+}
+
+#page_bottom {
+	border: 0px;
+	margin: 0 0 0 3px;
+	height: 123px;
+	background: url(../images/page-bottom.gif) no-repeat;
+}
+
+#mainImage {
+	float: left;
+	margin: 0 10px 10px 0;
+}
+
+#content {
+	margin: 0px 0 0 200px;
+	padding: 0 40px;
+}
+
+#menu {
+	float: left;
+	text-align: right;
+	padding: 10px;
+	width: 190px;
+}
+
+#ricardogomez {
+	margin: 10px 0 40px 0;
+}
+
+#menu .item {
+	margin: 5px 0;
+}
+
+
+/* ADMIN */
+#admin {
+	background-color: white;
+	border: 1px solid gray;
+	border-top: 0px;
+	width: 800px;
+	margin:0px auto;
+}
+
+#admin a {
+	display: block;
+	float: left;
+	margin: 5px;
+	padding: 2px 5px;
+}
+
+#admin a:hover {
+	background-color: #F0F0D8;	
+}
