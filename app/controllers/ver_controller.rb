@@ -2,11 +2,12 @@ class VerController < ApplicationController
 	layout 'ver'
 	
 	def index
-		params[:section] = 'inicio'
-		show
-		render :action => 'show'
+#		params[:section] = 'inicio'
+#		show
+#		render :action => 'show'
+    render :action => 'index', :layout => 'nada'
 	end
-	
+
 	def show
 		section = params[:section]
 		name = params[:page] || section

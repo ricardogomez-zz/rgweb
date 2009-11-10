@@ -1,0 +1,19 @@
+
+<% content_for :head do -%>
+  <%= stylesheet_link_tag 'portada' %>
+<% end -%>
+
+<div id="center">
+  <div id="playground">
+    <ul id="sections">
+      <% sections.each do |section| %>
+        <li><%= link_to section, section_url(section), :id => "section-#{section}" %></li>
+      <% end %>
+    </ul>
+    <div id="map">
+      <% sections.each do |section| %>
+       <%= link_to section, section_url(section), :id => "hover-#{section}" %>
+      <% end %>
+    </div>
+  </div>
+</div>
