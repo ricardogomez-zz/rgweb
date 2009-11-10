@@ -38,6 +38,7 @@ namespace :config do
     %w[database.yml].each do |f|
       run "ln -nsf #{shared_path}/config/#{f} #{release_path}/config/#{f}"
     end
+     run "ln -sf #{shared_path}/rgmedia #{release_path}/public/attachments"
   end
 end
 
