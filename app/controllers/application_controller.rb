@@ -5,10 +5,19 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
-  SECTIONS = ['inicio', 'paraviajar', 'paraleer', 'mislibros', 'premios', 'biografia', 'contacto', 'critica']
+  helper_method :sections
+
+  SECTIONS = ['inicio', 'webdeamigos', 'conferencias', 'paraleer', 'mislibros', 'premios', 'biografia',
+    'encuentros', '---', 'contacto', 'el sáhara']
+
+  SECTIONS_OLD = ['inicio', 'paraviajar', 'paraleer', 'mislibros', 'premios', 'biografia', 'contacto', 'critica']
 
   protected
-  def require_user
+  def sections
+    SECTIONS
+  end
+
+  def login_required
     authenticate_or_request_with_http_basic do |username, password|
       username == "ricardo" && password == "entrar"
     end

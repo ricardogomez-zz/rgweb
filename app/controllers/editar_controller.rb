@@ -11,7 +11,7 @@ class EditarController < ApplicationController
   
   
   def index
-    list
+    lista
     render :action => 'lista'
   end
 

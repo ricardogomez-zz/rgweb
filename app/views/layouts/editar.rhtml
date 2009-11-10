@@ -17,7 +17,7 @@
 	<% end %>
 	</div>
 
-	<% for section in @sections %>
+	<% for section in sections %>
 		<%= link_to_if section != current_section, section, :action => 'lista', :section => section %> |
 	<% end %>
 
