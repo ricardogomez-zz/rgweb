@@ -3,7 +3,8 @@ class MoveParaViajarToWebsAmigas < ActiveRecord::Migration
     Page.all(:conditions => {:section => 'paraviajar'}).each do |p|
       p.update_attribute(:section, 'websamigas')
     end
-    Page.first(:conditions => {:name => 'paraviajar'}).update_attribute(:name, 'websamigas')
+    principal = Page.find_by_name('paraviajar')
+    principal.update_attribute(:name, 'websamigas') if principal
   end
 
   def self.down

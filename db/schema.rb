@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091110172920) do
+ActiveRecord::Schema.define(:version => 20091111163641) do
 
   create_table "attachments", :force => true do |t|
     t.string  "content_type"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20091110172920) do
     t.string   "title"
     t.string   "section"
     t.string   "head",       :limit => 1024
-    t.string   "content",    :limit => 8192
+    t.text     "content"
     t.string   "end",        :limit => 4096
     t.string   "extra"
     t.string   "params"

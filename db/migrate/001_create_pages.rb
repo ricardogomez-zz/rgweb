@@ -5,7 +5,7 @@ class CreatePages < ActiveRecord::Migration
       	t.column "title", :string
       	t.column "section", :string
       	t.column "head", :string, {:limit => 1024}
-      	t.column "content", :string, {:limit => 8192}
+      	t.column "content", :text
     end
   end
 
