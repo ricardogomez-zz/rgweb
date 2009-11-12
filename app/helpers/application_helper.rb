@@ -5,8 +5,8 @@ module ApplicationHelper
 		link_to "<h2>#{name}</h2>", section_url(name), {:class => 'item' }
 	end
 
-  def section_url(name)
-    {:controller => 'ver', :action => 'show',  :section => name}
+  def section_url(name, current = nil)
+    name == current ? '#' : {:controller => 'ver', :action => 'show',  :section => name}
   end
 
 	def default_url(name)
