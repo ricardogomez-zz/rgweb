@@ -24,7 +24,7 @@
     </ul>
     <div id="map">
       <% sections.each do |section| %>
-        <%= link_to section, section_url(section), :id => "hover-#{section}" %>
+        <%= link_to(section, section_url(section), :id => "hover-#{section}") unless section == 'inicio' %>
       <% end %>
     </div>
   </div>

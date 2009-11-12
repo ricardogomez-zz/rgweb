@@ -39,6 +39,7 @@ namespace :config do
       run "ln -nsf #{shared_path}/config/#{f} #{release_path}/config/#{f}"
     end
      run "ln -sf #{shared_path}/rgmedia #{release_path}/public/attachments"
+     run "ln -sf #{shared_path}/cache #{release_path}/public/cache"
   end
 end
 

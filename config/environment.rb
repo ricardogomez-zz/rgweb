@@ -10,4 +10,11 @@ Rails::Initializer.run do |config|
   #config.gem 'RedCloth', :version => '3.0.4'
   config.gem 'less'
   config.time_zone = 'UTC'
+
+ config.action_controller.session = {
+    :session_key => '_ricardogomez_session',
+    :secret      => 'd2a56a1d57b98d43ebeff6c2ee53dcebf7257026f1173f99653be71e0199fc28f152be0717230933844416eb6fea8de47c4c60aed25cbfa2722fe8fe891ef944'
+  }
+
+  config.action_controller.page_cache_directory = RAILS_ROOT + "/public/cache/"
 end

@@ -17,7 +17,7 @@ class EditarController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :lista }
+    :redirect_to => { :action => :lista }
 
   def lista
     @pages = Page.find_all_by_section(params[:section], :order => 'position')
@@ -33,7 +33,7 @@ class EditarController < ApplicationController
     if @page.save	
       flash[:notice] = 'Página creada'
       redirect_to :action => 'edit', :id => @page.id
-	    else
+    else
       render :action => 'new'
     end
   end
@@ -58,12 +58,12 @@ class EditarController < ApplicationController
   
   def reorder
   	section = params[:section]
-	@items = Page.find(:all, :conditions => ["section = ?", section], :order => "position")
-	@items.each_with_index do |item, index| 
-		item.update_attribute(:position, "%03d" % (index + 1))
-		item.save
-	end
-	redirect_to :action => 'lista', :section => section
+    @items = Page.find(:all, :conditions => ["section = ?", section], :order => "position")
+    @items.each_with_index do |item, index|
+      item.update_attribute(:position, "%03d" % (index + 1))
+      item.save
+    end
+    redirect_to :action => 'lista', :section => section
   end
   
   def add_attachment
@@ -74,9 +74,9 @@ class EditarController < ApplicationController
   	save_and_edit page
   end
   
- private
+  private
  
-   def rename(oldname, newname)
+  def rename(oldname, newname)
   	pages = Page.find_all_by_section(oldname)
   	pages.each {|p| p.update_attribute(:section, newname)}
   end
@@ -87,14 +87,19 @@ class EditarController < ApplicationController
     else
     	flash[:notice] = 'No se ha podido guardar!!!! aaargggggg'
     end
-      redirect_to :action => 'edit', :id => page.id 	
- 	end
+    if page.section == page.name
+      expire_page :controller =>'ver', :action => 'show', :section => page.section
+    else
+      expire_page :controller =>'ver', :action => 'show', :section => page.section, :page => page.name
+    end
+    redirect_to :action => 'edit', :id => page.id
+  end
  
- 	def has_attachment(params)
- 		!params[:main_data].nil? && params[:main_data].length > 0
- 	end
+  def has_attachment(params)
+    !params[:main_data].nil? && params[:main_data].length > 0
+  end
  	
- 	def main_attachment(params)
- 		Attachment.new(:uploaded_data => params[:main_data], :tags => Page::IMAGE_TAGS[:main])
- 	end
+  def main_attachment(params)
+    Attachment.new(:uploaded_data => params[:main_data], :tags => Page::IMAGE_TAGS[:main])
+  end
 end

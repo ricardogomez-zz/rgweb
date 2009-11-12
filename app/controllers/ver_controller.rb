@@ -1,6 +1,8 @@
 class VerController < ApplicationController
 	layout 'ver'
-	
+
+  after_filter {|c| c.cache_page}
+
 	def index
     @section = 'inicio'
     #		params[:section] = 'inicio'
