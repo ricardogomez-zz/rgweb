@@ -1,6 +1,17 @@
 
 <% content_for :head do -%>
   <%= stylesheet_link_tag 'portada' %>
+  <script type="text/javascript">
+    $(function () {
+      $("#map a").hover(function() {
+        var id = $(this).attr('id').replace(/^hover-/, '#section-');
+        $(id).css('opacity', 1);
+      }, function() {
+        var id = $(this).attr('id').replace(/^hover-/, '#section-');
+        $(id).css('opacity', 0.6);
+      });
+    });
+  </script>
 <% end -%>
 
 <div id="center">
@@ -12,7 +23,7 @@
     </ul>
     <div id="map">
       <% sections.each do |section| %>
-       <%= link_to section, section_url(section), :id => "hover-#{section}" %>
+        <%= link_to section, section_url(section), :id => "hover-#{section}" %>
       <% end %>
     </div>
   </div>

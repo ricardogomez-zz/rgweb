@@ -1,11 +1,11 @@
 <div id="menu">
   <div id="logo">
     <%= link_to image_tag('ricardogomez.gif'), {:section => ''}, {:alt => 'logoric'} %>
-    <div id="sections">
-      <% sections.each do |section| %>
-        <%= section_for section %>
-      <% end %>
-    </div>
   </div>
+  <ul id="sections">
+    <% sections.each do |section| %>
+      <li><%= link_to section, section_url(section), :id => "section-#{section}" %></li>
+    <% end %>
+  </ul>
 </div> <!-- menu -->
 

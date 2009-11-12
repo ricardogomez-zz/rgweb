@@ -1,4 +1,11 @@
 
+
+
+div.spacer {
+	clear: both;
+}
+
+
 body {
 	background-color: #F0F0D8;
 	text-align: left;
