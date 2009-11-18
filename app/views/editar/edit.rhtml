@@ -1,20 +1,19 @@
 <h1>Editando "<%= @page.title %>"</h1>
 
 <div class="actions">
-	<%= link_to_function 'Guardar', 'getElementById("editor").submit();' %>
-	<%= link_to "Volver a la sección ''#{@page.section}''",
-		{:controller => 'editar', :action => 'lista', :section => @page.section} %>
-	<%= link_to 'Ver esta página en la web', 
-		{:controller => 'ver', :action => 'show', :section => @page.section, :page => @page.name} %>
-	<div class="spacer">&nbsp;</div>
+  <%= link_to_function 'Guardar', 'getElementById("editor").submit();' %>
+  <%= link_to "Volver a la sección ''#{@page.section}''",
+    {:controller => 'editar', :action => 'lista', :section => @page.section} %>
+  <%= link_to 'Ver esta página en la web',
+    {:controller => 'ver', :action => 'show', :section => @page.section, :page => @page.name} %>
+  <div class="spacer">&nbsp;</div>
 </div>
 
-
-
-<%= render :partial => 'images', :locals => {:page => @page} %>
 
 <% form_for :page, @page, :url => {:action => 'update', :id => @page}, :html => {:multipart => true, :id => 'editor'}  do |form| %>
   <%= render :partial => 'form', :locals => {:f => form, :page => @page} %>
 <% end %>
 
+<%= render :partial => 'images', :locals => {:page => @page} %>
+<div class="spacer">&nbsp;</div>
 
