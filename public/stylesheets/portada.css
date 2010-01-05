@@ -47,6 +47,7 @@ input, textarea, select {
 input, textarea, select { *font-size: 100%; }
 legend { color: #000000; }
 del, ins { text-decoration: none; }
+div.spacer { clear: both; }
 .debug { border: 1px solid red; }
 #sections li a {
   display: block;
