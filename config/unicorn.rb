@@ -1,4 +1,5 @@
 root = "/home/deployer/apps/rgweb/current"
+env = 'production'
 working_directory root
 pid "#{root}/tmp/pids/unicorn.pid"
 stderr_path "#{root}/log/unicorn.log"

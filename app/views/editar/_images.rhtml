@@ -8,9 +8,9 @@
 			<label>tipo:</label> <%= image.tags %><br/>
 			<label>tamaño:</label> <%= image.width %>x<%= image.height %><br/>
 			<label>insertar:</label> !<%= image.public_filename %>!<br/>
-			<label>insertar miniatura:</label> !<%= image.public_filename(:thumb) %>!<br/>
+      <!--<label>insertar miniatura:</label> !<%= image.public_filename(:thumb) %>!--><br/>
 			<%= image_tag image.public_filename, :alt => image.filename %>
-			<%= image_tag image.public_filename(:thumb), :alt => image.filename + '(thumbnail)' %>
+			<%#= image_tag image.public_filename(:thumb), :alt => image.filename + '(thumbnail)' %>
 			<br/>
 			<%= link_to 'borrar', {:controller => 'attachments', :action => 'delete_image', :page => page.id, :id => image.id},
 				:confirm => "estás a punto de borrar la #{image.tags}. seguro!!?" %><br/>
