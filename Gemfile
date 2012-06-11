@@ -6,3 +6,5 @@ gem 'mysql2', '0.2.7'
 gem 'sqlite3'
 gem 'pg'
 
+gem 'unicorn'
+gem 'capistrano'

@@ -1,81 +1,54 @@
-load_paths.unshift File.expand_path(File.dirname(__FILE__) + '/../vendor/plugins/awesomeness/recipes')
 
-# BACKUP: http://opensoul.org/2007/2/9/automatically-backing-up-your-remote-database-on-deploy
-# SOURCES setup users: http://www.viget.com/extend/building-an-environment-from-scratch-with-capistrano-2/
-# setup deploy: http://www.capify.org/getting-started/from-the-beginning/
+require "bundler/capistrano"
 
+server "176.58.98.122", :web, :app, :db, primary: true
 
-require 'yaml'
-GIT = YAML.load_file("#{File.dirname(__FILE__)}/git.yml")
-
-default_run_options[:pty] = true
 set :application, "rgweb"
-set :deploy_to, "/home/deploy/#{application}"
-set :user, "deploy"
+set :user, "deployer"
+set :deploy_to, "/home/#{user}/apps/#{application}"
+set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, "git"
-set :repository,  "git@github.com:ricardogomez/rgweb.git"
+set :repository, "git@github.com:ricardogomez/#{application}.git"
 set :branch, "master"
-set :deploy_via, :remote_cache
-set :scm_verbose, true
-set :scm_passphrase, GIT['password']
 
-# set :git_shallow_clone, 1 #set :git_enable_submodules, 1
+default_run_options[:pty] = true
+ssh_options[:forward_agent] = true
 
-role :app, "toami.net"
-role :web, "toami.net"
-role :db,  "toami.net", :primary => true
-
-after "deploy:update_code", "config:copy_shared_configurations"
-after "deploy", "deploy:cleanup"
-after "deploy", "deploy:restart"
-
-# Configuration Tasks
-namespace :config do
-  desc "copy shared configurations to current"
-  task :copy_shared_configurations, :roles => [:app] do
-    %w[database.yml].each do |f|
-      run "ln -nsf #{shared_path}/config/#{f} #{release_path}/config/#{f}"
-    end
-    run "ln -sf #{shared_path}/rgmedia #{release_path}/public/attachments"
-    run "ln -sf #{shared_path}/cache #{release_path}/public/cache"
-  end
-end
-
+after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
 namespace :deploy do
-  desc "Restarting mod_rails with restart.txt"
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "touch #{current_path}/tmp/restart.txt"
-  end
-
-  [:start, :stop].each do |t|
-    desc "#{t} task is a no-op with mod_rails"
-    task t, :roles => :app do ; end
-  end
-end
-
-namespace :backup do
-  desc "Backup the remote production database"
-  task :mysql, :roles => :db, :only => { :primary => true } do
-    filename = "#{application}.dump.#{Time.now.to_i}.sql.bz2"
-    file = "/tmp/#{filename}"
-    on_rollback { delete file }
-    db = YAML::load(ERB.new(IO.read(File.join(File.dirname(__FILE__), 'database.yml'))).result)['production']
-    run "mysqldump -u #{db['username']} --password=#{db['password']} #{db['database']} | bzip2 -c > #{file}"  do |ch, stream, data|
-      puts data
+  %w[start stop restart].each do |command|
+    desc "#{command} unicorn server"
+    task command, roles: :app, except: {no_release: true} do
+      run "/etc/init.d/unicorn_#{application} #{command}"
     end
-    `mkdir -p #{File.dirname(__FILE__)}/../backups/`
-    get file, "backups/#{filename}"
-    `gpg -c #{File.dirname(__FILE__)}/../backups/#{filename}`
-    `rm #{File.dirname(__FILE__)}/../backups/#{filename}`
-    # delete file
   end
+
+  task :setup_config, roles: :app do
+    sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
+    sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+    run "mkdir -p #{shared_path}/config"
+  end
+  after "deploy:setup", "deploy:setup_config"
+
+  task :symlink_config, roles: :app do
+    ['database.yml'].each do |file|
+      run "ln -nfs #{shared_path}/config/#{file} #{release_path}/config/#{file}"
+    end
+  end
+  after "deploy:finalize_update", "deploy:symlink_config"
+
+  desc "Make sure local git is in sync with remote."
+  task :check_revision, roles: :web do
+    unless `git rev-parse HEAD` == `git rev-parse origin/master`
+      puts "WARNING: HEAD is not the same as origin/master"
+      puts "Run `git push` to sync changes."
+      exit
+    end
+  end
+  before "deploy", "deploy:check_revision"
 end
 
-desc "Backup the database before running migrations"
-task :before_migrate do
-  backup
-end
-
+load 'config/deploy/postgres'
