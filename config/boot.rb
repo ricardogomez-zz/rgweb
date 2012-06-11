@@ -1,3 +1,4 @@
+require 'thread'
 # Don't change this file!
 # Configure your app in config/environment.rb and config/environments/*.rb
 
@@ -99,10 +100,24 @@ module Rails
       end
 
       private
-        def read_environment_rb
-          File.read("#{RAILS_ROOT}/config/environment.rb")
-        end
+      def read_environment_rb
+        File.read("#{RAILS_ROOT}/config/environment.rb")
+      end
     end
+  end
+end
+
+class Rails::Boot
+  def run
+    load_initializer
+
+    Rails::Initializer.class_eval do
+      def load_gems
+        @bundler_loaded ||= Bundler.require :default, Rails.env
+      end
+    end
+
+    Rails::Initializer.run(:set_load_path)
   end
 end
 
