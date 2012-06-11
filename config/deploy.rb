@@ -37,6 +37,7 @@ namespace :deploy do
     ['database.yml'].each do |file|
       run "ln -nfs #{shared_path}/config/#{file} #{release_path}/config/#{file}"
     end
+    run "ln -sf #{shared_path}/system/attachments #{release_path}/public/attachments"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 

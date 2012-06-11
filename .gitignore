@@ -9,5 +9,6 @@ db/development.sqlite3
 public/cache/**
 .idea/
 public/attachments/
+public/system/
 db/*.yml
 .rvmrc
