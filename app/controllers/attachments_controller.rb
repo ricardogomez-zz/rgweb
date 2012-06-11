@@ -1,3 +1,4 @@
+# encoding: utf-8
 class AttachmentsController < ApplicationController
 
 	def delete_image
