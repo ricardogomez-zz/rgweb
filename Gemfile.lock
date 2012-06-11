@@ -23,7 +23,6 @@ GEM
       mutter (>= 0.3.7)
       treetop (>= 1.4.2)
     mutter (0.5.3)
-    mysql2 (0.2.7)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -58,7 +57,6 @@ PLATFORMS
 DEPENDENCIES
   capistrano
   less (= 1.2.11)
-  mysql2 (= 0.2.7)
   pg
   rails (~> 2.3.14)
   sqlite3
