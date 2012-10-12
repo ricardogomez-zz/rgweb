@@ -12,6 +12,9 @@ class VerController < ApplicationController
 	end
 
 	def show
+    if params[:actualizar].present?
+      expire_page
+    end
 		@section = params[:section]
     if 'inicio' == params[:section]
       redirect_to :action => 'index'

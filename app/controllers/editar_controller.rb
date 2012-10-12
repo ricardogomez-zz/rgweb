@@ -1,16 +1,15 @@
 # encoding: utf-8
 class EditarController < ApplicationController
   before_filter :login_required
-  
-  
+
   def renombra
-  	rename('para_leer', 'paraviajar')
-  	rename('textos', 'paraleer')
-  	rename('libros', 'mislibros')
-  	render :text => 'recuerda cambiar las principales!'
+    rename('para_leer', 'paraviajar')
+    rename('textos', 'paraleer')
+    rename('libros', 'mislibros')
+    render :text => 'recuerda cambiar las principales!'
   end
-  
-  
+
+
   def index
     lista
     render :action => 'lista'
@@ -46,9 +45,9 @@ class EditarController < ApplicationController
   def update
     page = Page.find(params[:id])
     page.attributes = params[:page]
-		page.attachments << main_attachment(params) if has_attachment(params)
-			
-		save_and_edit page
+    page.attachments << main_attachment(params) if has_attachment(params)
+
+    save_and_edit page
   end
 
   def destroy
@@ -56,9 +55,9 @@ class EditarController < ApplicationController
     page.destroy
     redirect_to :action => 'lista', :section => page.section
   end
-  
+
   def reorder
-  	section = params[:section]
+    section = params[:section]
     @items = Page.find(:all, :conditions => ["section = ?", section], :order => "position")
     @items.each_with_index do |item, index|
       item.update_attribute(:position, "%03d" % (index + 1))
@@ -66,40 +65,42 @@ class EditarController < ApplicationController
     end
     redirect_to :action => 'lista', :section => section
   end
-  
+
   def add_attachment
-  	page = Page.find(params[:id])
-  	attachment = Attachment.new(:uploaded_data => params[:data], :tags => Page::IMAGE_TAGS[:extra])
-  	page.attachments << attachment
-  	
-  	save_and_edit page
+    page = Page.find(params[:id])
+    attachment = Attachment.new(:uploaded_data => params[:data], :tags => Page::IMAGE_TAGS[:extra])
+    page.attachments << attachment
+
+    save_and_edit page
   end
-  
+
   private
- 
+
   def rename(oldname, newname)
-  	pages = Page.find_all_by_section(oldname)
-  	pages.each {|p| p.update_attribute(:section, newname)}
+    pages = Page.find_all_by_section(oldname)
+    pages.each {|p| p.update_attribute(:section, newname)}
   end
- 
- 	def save_and_edit(page)
-		if page.save
+
+  def save_and_edit(page)
+    if page.save
       flash[:notice] = 'Página guardada'
     else
-    	flash[:notice] = 'No se ha podido guardar!!!! aaargggggg'
+      flash[:notice] = 'No se ha podido guardar!!!! aaargggggg'
     end
+
     if page.section == page.name
       expire_page :controller =>'ver', :action => 'show', :section => page.section
     else
       expire_page :controller =>'ver', :action => 'show', :section => page.section, :page => page.name
     end
+
     redirect_to :action => 'edit', :id => page.id
   end
- 
+
   def has_attachment(params)
     !params[:main_data].nil? && params[:main_data].length > 0
   end
- 	
+
   def main_attachment(params)
     Attachment.new(:uploaded_data => params[:main_data], :tags => Page::IMAGE_TAGS[:main])
   end
