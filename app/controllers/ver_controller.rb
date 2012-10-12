@@ -1,21 +1,30 @@
 class VerController < ApplicationController
-	layout 'ver'
+  layout 'ver'
 
   after_filter {|c| c.cache_page}
 
-	def index
+  def index
     @section = 'inicio'
     #		params[:section] = 'inicio'
     #		show
     #		render :action => 'show'
     render :action => 'index', :layout => 'nada'
-	end
+  end
 
-	def show
+  def actualizar
+    section = params[:section]
+    name = params[:page].present? ? params[:page] : section
+    page = Page.find_by_section_and_name(section, name)
+    expire_page :controller =>'ver', :action => 'show', :section => page.section
+    expire_page :controller =>'ver', :action => 'show', :section => page.section, :page => page.name
+    redirect_to :action => 'show'
+  end
+
+  def show
     if params[:actualizar].present?
       expire_page
     end
-		@section = params[:section]
+    @section = params[:section]
     if 'inicio' == params[:section]
       redirect_to :action => 'index'
     else
@@ -27,5 +36,5 @@ class VerController < ApplicationController
         @subsection = ""
       end
     end
-	end	
+  end	
 end

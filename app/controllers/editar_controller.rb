@@ -88,11 +88,8 @@ class EditarController < ApplicationController
       flash[:notice] = 'No se ha podido guardar!!!! aaargggggg'
     end
 
-    if page.section == page.name
-      expire_page :controller =>'ver', :action => 'show', :section => page.section
-    else
-      expire_page :controller =>'ver', :action => 'show', :section => page.section, :page => page.name
-    end
+    expire_page :controller =>'ver', :action => 'show', :section => page.section
+    expire_page :controller =>'ver', :action => 'show', :section => page.section, :page => page.name
 
     redirect_to :action => 'edit', :id => page.id
   end
