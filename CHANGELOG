@@ -2,6 +2,9 @@
 Para editar: /editar
 Las DNS están gestionadas por nominalia.com
 
+25/09/2013
+- Update rails (recuerda cambiar el environment.rb)
+
 15/07/2013
 - Cambiando de servidor, de nuevo
 
