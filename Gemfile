@@ -1,5 +1,8 @@
 source 'http://rubygems.org'
 
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
+
 gem 'rails', '2.3.18'
 gem 'less', '1.2.11'
 gem 'rmagick'
