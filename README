@@ -1,3 +1,5 @@
 = ricardogomez.com
 
 
+Reiniciar el servidor:
+ sudo service unicorn_rgweb restart
